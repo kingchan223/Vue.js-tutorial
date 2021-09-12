@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vue 3 Basics</title>
+    <style>
+      .box {
+        background-color: rgb(100, 112, 221);
+        height: 200px;
+        width: 200px;
+      }
+      .box.two {
+        background-color: rgb(224, 161, 89);
+        height: 200px;
+        width: 200px;
+      }
+      .box.three {
+        background-color: rgb(221, 100, 191);
+        height: 200px;
+        width: 200px;
+      }
+      [v-cloak] {
+        display: none;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- v-cloak의 display를 none으로 하면 순간 깜빡이며 보이는 뷰코드를 안보이게 할 수 있다. -->
+    <div id="app" v-cloak>
+      {{greeting}}
+      <!-- @keyup.enter와 같음. 즉 엔터가 눌리길 기다리고 있는 enter이다. -->
+      <input @keyup.enter="greet(greeting + '!!!')" v-model="greeting" />
+
+      <hr />
+
+      <button v-on:click="isVisible=!isVisible">Toggle Box</button>
+      <!-- 위의 버튼과 아래의 버튼은 똑같다. -->
+      <button @click="isVisible=!isVisible">Toggle Box</button>
+      <!-- 아래처럼 method를 정의해서 사용할 수 있다. -->
+      <button @click="toggleBox">Toggle Box</button>
+      <button @click.prevent.stop="toggleBox">Toggle Box</button
+      ><!--e.preventDefalut를 해준다.-->
+
+      <div v-if="isVisible" class="box"></div>
+    </div>
+
+    <script src="https://unpkg.com/vue@next"></script>
+    <script>
+      let app = Vue.createApp({
+        //data는 아래에더 정의한다.
+        data: function () {
+          return {
+            greeting: "Hello Vue 3!",
+            isVisible: false,
+          };
+        },
+        //method는 아래에다 정의한다.
+        methods: {
+          toggleBox() {
+            this.isVisible = !this.isVisible;
+          },
+          greet(greeting) {
+            alert(greeting);
+          },
+        },
+      });
+      app.mount("#app");
+    </script>
+  </body>
+</html>
