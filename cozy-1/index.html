@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>뷰 기초 익히기</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+  </head>
+  <body>
+    <div id="app">
+      {{nextYear("hello")}}
+      <input :type="type" :value="inputData" />
+      <a :href="getSearch('검색어')">NAVER</a>
+      <button>Click Me</button>
+    </div>
+    <script>
+      new Vue({
+        el: "#app",
+        data: {
+          person: {
+            name: "lee",
+            age: 20,
+          },
+          inputData: "hello",
+          type: "text",
+          link: "https://search.naver.com/search.naver?where=nexearch&sm=top_hty&fbm=1&ie=utf8&query=",
+        },
+        methods: {
+          getSearch(query) {
+            return this.link + query;
+          },
+          nextYear(greeting) {
+            return (
+              greeting +
+              " " +
+              this.person.name +
+              " is " +
+              (this.person.age + 1) +
+              " at next year "
+            );
+          },
+          otherMethod() {
+            return this.nextYear();
+          },
+        },
+      });
+    </script>
+  </body>
+</html>
